@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Table(name = "topicos")
@@ -18,7 +19,7 @@ public class TopicoDomain {
     private Long id;
     private String titulo;
     private String mensagem;
-    private Date dataCriacao;
+    private LocalDateTime dataCriacao;
     private String status;
     @ManyToOne
     @JoinColumn(name = "autor_id")
