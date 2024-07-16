@@ -18,15 +18,18 @@ public class TopicoService {
     private final UsuarioRepository usuarioRepository;
     private final CursoRepository cursoRepository;
     private final TopicoRepository repository;
+    private final String TOPICO_NAO_LOCALIZADO = "Tópico não localizado.";
+    private final String AUTOR_NAO_LOCALIZADO = "Autor não localizado.";
+    private final String CURSO_NAO_LOCALIZADO = "Curso não localizado.";
 
     public TopicoDomain criar(CriarTopicoRequest request) {
-        validarJaCadastrado(request);
+        validarJaCadastradoTituloMensagem(request);
 
         var autor = usuarioRepository.findById(request.getAutor())
-                .orElseThrow(() -> new NoResultException("Autor não localizado."));
+                .orElseThrow(() -> new NoResultException(AUTOR_NAO_LOCALIZADO));
 
         var curso = cursoRepository.findById(request.getCurso())
-                .orElseThrow(() -> new NoResultException("Curso não localizado"));
+                .orElseThrow(() -> new NoResultException(CURSO_NAO_LOCALIZADO));
 
         var topico = new TopicoDomain();
         topico.setAutor(autor);
@@ -38,7 +41,31 @@ public class TopicoService {
 
     }
 
-    private void validarJaCadastrado(CriarTopicoRequest request) {
+    public TopicoDomain atualizar(Long id, CriarTopicoRequest request) {
+        var topico = repository.findById(id)
+                .orElseThrow(() -> new NoResultException(TOPICO_NAO_LOCALIZADO));
+
+        validarJaCadastradoTituloMensagem(request);
+
+        var autor = usuarioRepository.findById(request.getAutor())
+                .orElseThrow(() -> new NoResultException(AUTOR_NAO_LOCALIZADO));
+
+        var curso = cursoRepository.findById(request.getCurso())
+                .orElseThrow(() -> new NoResultException(CURSO_NAO_LOCALIZADO));
+
+        topico.setTitulo(request.getTitulo());
+        topico.setMensagem(request.getMensagem());
+        topico.setCurso(curso);
+        return repository.save(topico);
+    }
+
+    public void excluir(Long id){
+        var topico = repository.findById(id)
+                .orElseThrow(() -> new NoResultException(TOPICO_NAO_LOCALIZADO));
+        repository.delete(topico);
+    }
+
+    private void validarJaCadastradoTituloMensagem(CriarTopicoRequest request) {
         if (repository.findByTituloAndMensagem(request.getTitulo(), request.getMensagem())) {
             throw new DataAlreadyRegisteredException("Tópico já cadastrado");
         }
