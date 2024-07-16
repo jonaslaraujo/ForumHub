@@ -3,6 +3,7 @@ package br.com.araujo.jonas.ForumHub.service;
 import br.com.araujo.jonas.ForumHub.domain.TopicoDomain;
 import br.com.araujo.jonas.ForumHub.http.request.CriarTopicoRequest;
 import br.com.araujo.jonas.ForumHub.infra.DataAlreadyRegisteredException;
+import br.com.araujo.jonas.ForumHub.model.DetalheTopico;
 import br.com.araujo.jonas.ForumHub.repository.CursoRepository;
 import br.com.araujo.jonas.ForumHub.repository.PerfilRepository;
 import br.com.araujo.jonas.ForumHub.repository.TopicoRepository;
@@ -91,6 +92,15 @@ public class TopicoService {
     public Page<TopicoDomain> listarPorCursoEAno(String nomeCurso, int ano, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return repository.findByCursoNomeAndAno(nomeCurso, ano, pageable);
+    }
+
+    public DetalheTopico listarDetalheTopico(Long id) {
+        var topico = repository.findById(id);
+
+        if (!topico.isPresent()) {
+            throw new NoResultException("Tópico não encontrado.");
+        }
+        return new DetalheTopico(topico.get(), "Detalhes do tópico");
     }
 
     private void validarJaCadastradoTituloMensagem(CriarTopicoRequest request) {

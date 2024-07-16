@@ -2,6 +2,7 @@ package br.com.araujo.jonas.ForumHub.controller;
 
 import br.com.araujo.jonas.ForumHub.domain.TopicoDomain;
 import br.com.araujo.jonas.ForumHub.http.request.CriarTopicoRequest;
+import br.com.araujo.jonas.ForumHub.model.DetalheTopico;
 import br.com.araujo.jonas.ForumHub.service.TopicoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -44,8 +45,9 @@ public class TopicoController {
     }
 
     @GetMapping({"/id"})
-    public void detailTopics(@PathVariable("id") Long id) {
-
+    public ResponseEntity<DetalheTopico> detailTopics(@PathVariable("id") Long id) {
+        var response = service.listarDetalheTopico(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping({"/id"})
