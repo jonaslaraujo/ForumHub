@@ -1,4 +1,4 @@
-package br.com.araujo.jonas.ForumHub.Domain;
+package br.com.araujo.jonas.ForumHub.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

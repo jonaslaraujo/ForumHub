@@ -1,8 +1,8 @@
-package br.com.araujo.jonas.ForumHub.Controller;
+package br.com.araujo.jonas.ForumHub.controller;
 
-import br.com.araujo.jonas.ForumHub.Domain.TopicoDomain;
-import br.com.araujo.jonas.ForumHub.Http.Request.CriarTopicoRequest;
-import br.com.araujo.jonas.ForumHub.Service.TopicoService;
+import br.com.araujo.jonas.ForumHub.domain.TopicoDomain;
+import br.com.araujo.jonas.ForumHub.http.request.CriarTopicoRequest;
+import br.com.araujo.jonas.ForumHub.service.TopicoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

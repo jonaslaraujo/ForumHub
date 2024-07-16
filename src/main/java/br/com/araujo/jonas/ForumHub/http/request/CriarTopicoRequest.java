@@ -1,7 +1,5 @@
-package br.com.araujo.jonas.ForumHub.Http.Request;
+package br.com.araujo.jonas.ForumHub.http.request;
 
-import br.com.araujo.jonas.ForumHub.Domain.CursoDomain;
-import br.com.araujo.jonas.ForumHub.Domain.UsuarioDomain;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
