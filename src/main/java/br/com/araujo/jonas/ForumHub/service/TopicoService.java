@@ -1,8 +1,6 @@
 package br.com.araujo.jonas.ForumHub.service;
 
-import br.com.araujo.jonas.ForumHub.domain.CursoDomain;
 import br.com.araujo.jonas.ForumHub.domain.TopicoDomain;
-import br.com.araujo.jonas.ForumHub.http.query.ListTopicoQuery;
 import br.com.araujo.jonas.ForumHub.http.request.CriarTopicoRequest;
 import br.com.araujo.jonas.ForumHub.infra.DataAlreadyRegisteredException;
 import br.com.araujo.jonas.ForumHub.repository.CursoRepository;
@@ -11,18 +9,14 @@ import br.com.araujo.jonas.ForumHub.repository.TopicoRepository;
 import br.com.araujo.jonas.ForumHub.repository.UsuarioRepository;
 import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.mapping.Join;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 @Service
 @RequiredArgsConstructor
@@ -98,22 +92,6 @@ public class TopicoService {
         Pageable pageable = PageRequest.of(page, size);
         return repository.findByCursoNomeAndAno(nomeCurso, ano, pageable);
     }
-
-//    public Page<TopicoDomain> listar(ListTopicoQuery query, Pageable pageable){
-//        return repository.findAll(
-//                getSpecification(query),
-//                pageable
-//        );
-//    }
-//
-//    private Specification<TopicoDomain> getSpecification(ListTopicoQuery topicoQuery) {
-//        return ((root, query, builder) -> {
-//            List<Predicate> predicates = new ArrayList<>();
-//
-//            Join<CursoDomain> cursoJoin = root.join("id");
-//            predicates.add(builder.equal(cursoJoin.get("cursoId"), query.get))
-//        })
-//    }
 
     private void validarJaCadastradoTituloMensagem(CriarTopicoRequest request) {
         if (repository.findByTituloAndMensagem(request.getTitulo(), request.getMensagem())) {

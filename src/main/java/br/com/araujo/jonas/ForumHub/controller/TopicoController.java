@@ -5,9 +5,12 @@ import br.com.araujo.jonas.ForumHub.http.request.CriarTopicoRequest;
 import br.com.araujo.jonas.ForumHub.service.TopicoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/topicos")
@@ -21,7 +24,29 @@ public class TopicoController {
     }
 
     @GetMapping
-    public void list() {}
+    public ResponseEntity<List<TopicoDomain>> listAll() {
+        var listTopicos = service.listarTodos();
+        return ResponseEntity.status(HttpStatus.OK).body(listTopicos);
+    }
+
+    @GetMapping("/paged")
+    public Page<TopicoDomain> listPaged(@RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "10") int size) {
+        return service.listarPaginado(page, size);
+    }
+
+    @GetMapping("/byfilter")
+    public Page<TopicoDomain> listByFilter(@RequestParam String nomeCurso,
+                                           @RequestParam int ano,
+                                           @RequestParam(defaultValue = "0") int page,
+                                           @RequestParam(defaultValue = "10") int size) {
+        return service.listarPorCursoEAno(nomeCurso, ano, page, size);
+    }
+
+    @GetMapping({"/id"})
+    public void detailTopics(@PathVariable("id") Long id) {
+
+    }
 
     @PutMapping({"/id"})
     public ResponseEntity<TopicoDomain> atualizar(@PathVariable("id") Long id, @RequestBody @Valid CriarTopicoRequest request) {
