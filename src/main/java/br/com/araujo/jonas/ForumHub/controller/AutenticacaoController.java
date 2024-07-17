@@ -6,6 +6,7 @@ import br.com.araujo.jonas.ForumHub.infra.security.DataTokenJWT;
 import br.com.araujo.jonas.ForumHub.repository.UsuarioRepository;
 import br.com.araujo.jonas.ForumHub.service.security.TokenService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/login")
+@AllArgsConstructor
 public class AutenticacaoController {
 
     @Autowired
     private AuthenticationManager manager;
-
     @Autowired
     private TokenService tokenService;
 
