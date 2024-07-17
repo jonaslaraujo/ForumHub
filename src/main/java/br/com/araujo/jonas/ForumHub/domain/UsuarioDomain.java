@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Table(name = "usuario")
 @Entity
 @Data
@@ -18,7 +20,7 @@ public class UsuarioDomain {
     private String login;
     private String email;
     private String senha;
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "perfil_id")
-    private PerfilDomain perfis;
+    private List<PerfilDomain> perfis;
 }

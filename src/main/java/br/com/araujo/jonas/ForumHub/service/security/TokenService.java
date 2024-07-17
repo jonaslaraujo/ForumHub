@@ -25,7 +25,7 @@ public class TokenService {
                     .withIssuer("API Soul Academy")
                     .withSubject(user.getLogin())
                     .withClaim("id", user.getId().toString()) //Chama para colocar qualquer informação a mais
-                    .withClaim("perfil", user.getPerfis().getId().toString())
+                    .withClaim("perfil", user.getPerfis().get(0).getId().toString())
                     .withExpiresAt(expirationDate())
                     .sign(algoritmo);
         } catch (JWTCreationException exception) {

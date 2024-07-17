@@ -1,6 +1,6 @@
 package br.com.araujo.jonas.ForumHub.infra.security;
 
-import br.com.araujo.jonas.ForumHub.repository.UsuarioRepository;
+import br.com.araujo.jonas.ForumHub.repository.UsuarioDetailsRepository;
 import br.com.araujo.jonas.ForumHub.service.security.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,7 +21,7 @@ public class SecurityFilter  extends OncePerRequestFilter {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private UsuarioRepository userDetailsRepository;
+    private UsuarioDetailsRepository userDetailsRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

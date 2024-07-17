@@ -33,7 +33,7 @@ public class TopicoService {
     public TopicoDomain criar(CriarTopicoRequest request) {
         validarJaCadastradoTituloMensagem(request);
 
-        var perfil = perfilRepository.findByName("Jonas")
+        var perfil = perfilRepository.findByNome("Jonas")
                 .orElseThrow(() -> new NoResultException("Não encontrei"));
 
 

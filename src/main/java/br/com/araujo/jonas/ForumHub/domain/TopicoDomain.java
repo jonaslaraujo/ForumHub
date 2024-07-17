@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Table(name = "topicos")
 @Entity
@@ -27,6 +28,10 @@ public class TopicoDomain {
     @JoinColumn(name = "curso_id")
     private CursoDomain curso;
     @ManyToMany
-    @JoinColumn(name = "resposta_id")
-    private RespostaDomain respostas;
+    @JoinTable(
+            name = "topico",
+            joinColumns = @JoinColumn(name = "topico_id"),
+            inverseJoinColumns = @JoinColumn(name = "resposta_id")
+    )
+    private Set<RespostaDomain> respostas;
 }

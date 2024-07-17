@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Set;
 
 @Table(name = "resposta")
 @Entity
@@ -17,9 +18,8 @@ public class RespostaDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mensagem;
-    @ManyToMany
-    @JoinColumn(name = "topico_id")
-    private TopicoDomain topico;
+    @ManyToMany(mappedBy = "respostas")
+    private Set<TopicoDomain> topico;
     private Date dataCriacao;
     @ManyToOne
     @JoinColumn(name = "autor_id")
