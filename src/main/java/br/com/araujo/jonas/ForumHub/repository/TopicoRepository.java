@@ -16,7 +16,7 @@ public interface TopicoRepository extends JpaRepository<TopicoDomain, Long> {
     Page<TopicoDomain> findAllByOrderByDataCriacaoAsc(Pageable pageable);
 
     // Método para listar por nome de curso e ano específico
-    @Query("SELECT " +
+    @Query(value = "SELECT " +
             "   t " +
             "FROM " +
             "   TopicoDomain t " +
@@ -24,6 +24,6 @@ public interface TopicoRepository extends JpaRepository<TopicoDomain, Long> {
             "       t.curso = c.id " +
             "WHERE " +
             "   c.nome = :nome " +
-            "   AND YEAR(t.dataCriacao) = :ano")
+            "   AND YEAR(t.dataCriacao) = :ano", nativeQuery = true)
     Page<TopicoDomain> findByCursoNomeAndAno(@Param("nome") String nomeCurso, @Param("ano") int ano, Pageable pageable);
 }
