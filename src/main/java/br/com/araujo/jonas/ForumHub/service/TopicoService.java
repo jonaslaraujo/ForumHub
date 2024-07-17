@@ -2,7 +2,7 @@ package br.com.araujo.jonas.ForumHub.service;
 
 import br.com.araujo.jonas.ForumHub.domain.TopicoDomain;
 import br.com.araujo.jonas.ForumHub.http.request.CriarTopicoRequest;
-import br.com.araujo.jonas.ForumHub.infra.DataAlreadyRegisteredException;
+import br.com.araujo.jonas.ForumHub.infra.exception.DataAlreadyRegisteredException;
 import br.com.araujo.jonas.ForumHub.model.DetalheTopico;
 import br.com.araujo.jonas.ForumHub.repository.CursoRepository;
 import br.com.araujo.jonas.ForumHub.repository.PerfilRepository;

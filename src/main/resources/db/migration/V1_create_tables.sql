@@ -17,6 +17,7 @@ CREATE TABLE Curso (
 CREATE TABLE Usuario (
     id BIGSERIAL NOT NULL,
     nome VARCHAR(100),
+    login VARCHAR(20),
     email VARCHAR(100),
     senha VARCHAR(50),
     perfil_id BIGINT NOT NULL,
